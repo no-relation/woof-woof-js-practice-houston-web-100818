@@ -1,7 +1,7 @@
 const API = 'http://localhost:3000/pups'
 const dogBar = document.getElementById('dog-bar')
 const dogInfo = document.getElementById('dog-info')
-const dogFilter = getElementById('filter-div')
+const dogFilter = document.getElementById('good-dog-filter')
 let dogeArray = []
 
 fetch(API)
@@ -11,9 +11,19 @@ fetch(API)
             renderDogBar(dogeArray)
     })
 
-
+dogFilter.addEventListener('click', function() {
+    if (dogFilter.innerHTML == 'Filter good dogs: OFF') {
+        newDogArray = dogeArray.filter((doge) => doge.isGoodDog)
+        dogFilter.innerHTML = 'Filter good dogs: ON'
+        renderDogBar(newDogArray)
+    } else {
+        dogFilter.innerHTML = 'Filter good dogs: OFF'
+        renderDogBar(dogeArray)
+    }
+})
 
 function renderDogBar(paramArray) {
+    dogBar.innerHTML = ''
     paramArray.forEach(function(doge){
         let dogeJect = document.createElement('span')
         dogeJect.innerHTML = doge.name
